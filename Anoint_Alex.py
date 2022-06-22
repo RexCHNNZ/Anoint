@@ -224,53 +224,20 @@ def cs():
         print("Alex: You got "+str(score)+" out of 6.")
         score = 0
 
-def isLeap(year):
-    if year % 4 and not (year % 100) or year % 400:
-        return True
-    return False
-
-def amountOfDaysInYear(year):
-    
-    isLeapYear = isLeap(year)
-    if isLeapYear:
-        amountOfDaysInYear = 366
-    else:
-        amountOfDaysInYear = 365
-    return amountOfDaysInYear
-
-def daysAlive(birthYear, birthMonth, birthDate):
-
-#From the birth date to the end of the year
-    daysFromBeginningOfYear = 0
-    for ii in range(birthMonth - 1):
-        daysFromBeginningOfYear += daysInAYear[birthMonth]
-    daysFromBeginningOfYear += birthDate
-    daysToTheEndOfYear = amountOfDaysInYear(birthYear) - daysFromBeginningOfYear
-
-#From the start of current year to the birthday
-    daysFromBeginningOfCurrentYear = 0
-    CurrentYear = int(datetime.datetime.now().strftime('%y'))
+def dayslived():
+    time.sleep(1)
+    birthYear = int(input("Alex: Please enter your year of birth: "))
+    time.sleep(1)
+    birthMonth = int(input("Alex: Please enter your month of birth: "))
+    time.sleep(1)
+    birthDay = int(input("Alex: Please enter your day of birth: "))
+    time.sleep(2)
+    birth = datetime.date(birthYear,birthMonth,birthDay)
+    currentYear = int(datetime.datetime.now().strftime('%Y'))
     currentMonth = int(datetime.datetime.now().strftime('%m'))
-    currentDate = int(datetime.datetime.now().strftime('%d'))
-
-    yearInPeriod = CurrentYear - birthYear - 1
-    
-    for ii in range(currentMonth - 1):
-        daysFromBeginningOfCurrentYear += daysInAYear[currentMonth]
-    daysFromBeginningOfCurrentYear += currentDate
-    
-    daysInPeriod = 0
-
-    for ii in range(yearInPeriod):
-        daysInPeriod += amountOfDaysInYear(birthYear + ii + 1)
-    
-    totalDays = daysInPeriod + daysToTheEndOfYear + daysFromBeginningOfCurrentYear
-
-    print(totalDays)
-
-    
-
-
+    currentDay = int(datetime.datetime.now().strftime('%d'))
+    current = datetime.date(currentYear,currentMonth,currentDay)
+    print("Alex: You have lived for "+str(current.__sub__(birth).days)+" days")
 
 line1 = ["Alex: Greetings, my name is Alex, what is your name?","Alex: Hello, I'm Alex, could you tell me your name?","Alex: Hi, this is Alex, what's your name?"]
 print(random.choice(line1))
@@ -308,11 +275,8 @@ while select != 0:
         quiz()
         time.sleep(2)
     elif select == 4:
-        birthYear = int(input("Alex: Enter your year of birth"))
-        birthMonth = int(input("Alex: Enter your month of birth"))
-        birthDate = int(input("Alex: Enter your date of birth"))
-        daysAlive(birthYear,birthMonth,birthDate)
-
+        dayslived()
+        time.sleep(2)
     else:
         print("Alex: Exit")
 time.sleep(1)
